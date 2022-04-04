@@ -1,0 +1,29 @@
+{
+  "name": "crossy-road-clone",
+  "version": "1.0.0",
+  "description": "A simple crossy road clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CuddlyBunion341/crossy-road-clone.git"
+  },
+  "keywords": [
+    "Crossyroad",
+    "Threejs",
+    "3D",
+    "Game",
+    "Clone"
+  ],
+  "author": "Daniel Bengl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CuddlyBunion341/crossy-road-clone/issues"
+  },
+  "homepage": "https://github.com/CuddlyBunion341/crossy-road-clone#readme",
+  "dependencies": {
+    "three": "^0.139.2"
+  }
+}
