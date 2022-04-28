@@ -1,5 +1,6 @@
 import { OrbitControls } from "OrbitControls";
 import { AxesHelper, PerspectiveCamera, WebGLRenderer } from "three";
+import { LaneManager } from "./lane.js";
 import { scene } from "./scene.js";
 
 const canvas = document.querySelector("#c");
@@ -12,6 +13,8 @@ const controls = new OrbitControls(camera, canvas);
 camera.position.set(1, 1, 1);
 scene.add(camera);
 scene.add(axis);
+
+const laneManager = new LaneManager();
 
 window.addEventListener("resize", () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
