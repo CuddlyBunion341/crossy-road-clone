@@ -36,10 +36,11 @@ export class Player {
 
 		if (!inRange(this.col + dx, 0, worldSize) || this.lane + dy < 0) return; // out of bounds
 
-		this.onMove();
-
 		this.col += dx;
 		this.lane += dy;
+		this.mesh.position.set(this.lane + 0.5, 0.35, this.col + 0.5);
+
+		this.onMove();
 
 		this.rotate(angle);
 	}
@@ -55,16 +56,29 @@ export class Player {
 
 	// listeners
 
-	onKeyDown(event) {
-		console.log("KeyDown", { code: event.code });
-	}
+	onKeyDown(event) {}
 	onKeyUp(event) {
-		console.log("KeyUp", { code: event.code });
+		const moveForward = () => this.move(directions.north);
+		const moveBackward = () => this.move(directions.south);
+		const moveRight = () => this.move(directions.east);
+		const moveLeft = () => this.move(directions.west);
+
+		({
+			KeyW: moveForward,
+			KeyS: moveBackward,
+			KeyA: moveLeft,
+			KeyD: moveRight,
+
+			KeyArrowUp: moveForward,
+			KeyArrowDown: moveBackward,
+			KeyArrowLeft: moveLeft,
+			KeyArrowRight: moveRight,
+		}[event.code]?.());
 	}
 
 	addListeners() {
-		window.addEventListener("keydown", this.onKeyDown);
-		window.addEventListener("keyup", this.onKeyUp);
+		window.addEventListener("keydown", this.onKeyDown.bind(this));
+		window.addEventListener("keyup", this.onKeyUp.bind(this));
 	}
 
 	removeListeners() {
