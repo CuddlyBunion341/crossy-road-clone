@@ -11,7 +11,8 @@ const directions = {
 };
 
 export class Player {
-	constructor() {
+	constructor(laneManager) {
+		this.laneManager = laneManager;
 		this.alive = true;
 		this.score = 0;
 		this.lane = 3;
@@ -35,6 +36,19 @@ export class Player {
 		const { dx, dy, angle } = direction;
 
 		if (!inRange(this.col + dx, 0, worldSize) || this.lane + dy < 0) return; // out of bounds
+
+		const currentLane = this.laneManager.getLane(this.lane + dy);
+		const collides = currentLane.collision(this.col + dx);
+
+		if (collides) {
+			switch (currentLane.constructor.name) {
+				case "VehicleLane":
+					this.die();
+					break;
+				case "ObstacleLane":
+					return; // dont move
+			}
+		}
 
 		this.col += dx;
 		this.lane += dy;

@@ -16,9 +16,7 @@ scene.add(camera);
 scene.add(axis);
 
 const laneManager = new LaneManager();
-const player = new Player();
-
-
+const player = new Player(laneManager);
 
 window.addEventListener("resize", () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
