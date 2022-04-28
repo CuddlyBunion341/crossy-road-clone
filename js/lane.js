@@ -14,7 +14,7 @@ export const LaneManager = function () {
 
 	this.addLane = () => {
 		const newLane = this.currentLane++;
-		const lane = new Lane(newLane, Math.random() < 0.5 ? 0 : 1); // random height
+		const lane = newLane <= 8 ? new EmptyLane(newLane) : new ObstacleLane(newLane);
 		this.lanes.push(lane);
 	};
 
@@ -31,6 +31,7 @@ export const LaneManager = function () {
 	init();
 };
 
+// Main lane class
 class Lane {
 	constructor(row, height) {
 		this.group = new Group();
@@ -52,4 +53,30 @@ class Lane {
 	}
 	update(delta) {}
 	collision(col) {}
+}
+
+// Specific lane classes
+class ObstacleLane extends Lane {
+	constructor(row) {
+		super(row, 1);
+		this.obstacles = Array.from({ length: worldSize }, (_, i) => {
+			if (Math.random() < 0.2) {
+				// 20% chance of obstacle
+				const obstacle = new Mesh(new BoxGeometry(0.8, 0.8, 0.8), new MeshMatcapMaterial({ color: 0xff0000 }));
+				obstacle.position.set(0.4, 0.4, i + 0.4);
+				this.group.add(obstacle);
+				return obstacle;
+			}
+		});
+	}
+
+	collision(col) {
+		return !!this.obstacles[col];
+	}
+}
+
+class EmptyLane extends Lane {
+	constructor(row) {
+		super(row, 1);
+	}
 }
