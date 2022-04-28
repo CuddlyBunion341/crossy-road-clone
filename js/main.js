@@ -1,6 +1,7 @@
 import { OrbitControls } from "OrbitControls";
 import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
 import { LaneManager } from "./lane.js";
+import { Player } from "./player.js";
 import { scene } from "./scene.js";
 
 const canvas = document.querySelector("#c");
@@ -15,6 +16,9 @@ scene.add(camera);
 scene.add(axis);
 
 const laneManager = new LaneManager();
+const player = new Player();
+
+
 
 window.addEventListener("resize", () => {
 	camera.aspect = window.innerWidth / window.innerHeight;
@@ -26,7 +30,9 @@ const clock = new Clock();
 
 const render = () => {
 	controls.update();
-	laneManager.update(clock.getDelta());
+	const delta = clock.getDelta();
+	laneManager.update(delta);
+	player.update(delta);
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 };
