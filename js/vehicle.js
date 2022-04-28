@@ -1,6 +1,6 @@
 import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 import { worldSize } from "./global.js";
-import { wrap } from "./util.js";
+import { inRange, wrap } from "./util.js";
 
 export class Vehicle {
 	constructor(type, direction, speed) {
@@ -15,8 +15,7 @@ export class Vehicle {
 		this.group.add(testCube);
 	}
 	contains(col) {
-		// todo: check if col is in vehicle
-		return false;
+		return inRange(col, this.position, this.position + 0.5);
 	}
 
 	update(delta) {

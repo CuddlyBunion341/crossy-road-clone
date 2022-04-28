@@ -6,3 +6,4 @@ export const wrap = (value, min, max) => {
 	if (value > max) return min;
 	return value;
 };
+export const inRange = (value, min, max) => value >= min && value <= max;
