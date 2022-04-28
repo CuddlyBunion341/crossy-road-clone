@@ -42,16 +42,16 @@ export class LaneManager {
 
 // Main lane class
 class Lane {
-	constructor(row, height) {
+	constructor(row, height, floorColor = 0xffffff) {
 		this.group = new Group();
 		this.row = row;
 		this.height = height;
-		this.init(scene);
+		this.init(floorColor);
 		this.active = true;
 	}
-	init() {
+	init(floorColor) {
 		this.group.position.set(this.row, 0, 0);
-		const floor = new Mesh(new BoxGeometry(1, 0.1, worldSize), new MeshMatcapMaterial({ color: 0xffffff }));
+		const floor = new Mesh(new BoxGeometry(1, 0.1, worldSize), new MeshMatcapMaterial({ color: floorColor }));
 		floor.position.set(0.5, -0.05 + 0.1 * this.height, worldSize / 2);
 		this.group.add(floor);
 		scene.add(this.group);
@@ -67,7 +67,7 @@ class Lane {
 // Specific lane classes
 class ObstacleLane extends Lane {
 	constructor(row) {
-		super(row, 1);
+		super(row, 1, 0x00ff00);
 		this.obstacles = Array.from({ length: worldSize }, (_, i) => {
 			if (Math.random() < 0.2) {
 				// 20% chance of obstacle
@@ -86,7 +86,7 @@ class ObstacleLane extends Lane {
 
 class VehicleLane extends Lane {
 	constructor(row) {
-		super(row, 0);
+		super(row, 0, 0x222222);
 		this.vehicleType = Math.random() < 0.2 ? "truck" : "car";
 		this.direction = randomSign();
 		this.vehicles = [];
@@ -112,6 +112,6 @@ class VehicleLane extends Lane {
 
 class EmptyLane extends Lane {
 	constructor(row) {
-		super(row, 1);
+		super(row, 1, 0x00a000);
 	}
 }
