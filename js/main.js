@@ -1,5 +1,5 @@
 import { OrbitControls } from "OrbitControls";
-import { AxesHelper, PerspectiveCamera, WebGLRenderer } from "three";
+import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
 import { LaneManager } from "./lane.js";
 import { scene } from "./scene.js";
 
@@ -22,8 +22,11 @@ window.addEventListener("resize", () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+const clock = new Clock();
+
 const render = () => {
 	controls.update();
+	laneManager.update(clock.getDelta());
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 };

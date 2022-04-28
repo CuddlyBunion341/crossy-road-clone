@@ -90,7 +90,7 @@ class VehicleLane extends Lane {
 		this.vehicleType = Math.random() < 0.2 ? "truck" : "car";
 		this.direction = randomSign();
 		this.vehicles = [];
-		this.speed = 1;
+		this.speed = 10;
 
 		this.initVehicles();
 	}
@@ -105,7 +105,7 @@ class VehicleLane extends Lane {
 		return this.vehicles.some(vehicle => vehicle.contains(col));
 	}
 
-	update() {
+	update(delta) {
 		if (this.active) this.vehicles.forEach(vehicle => vehicle.update(delta));
 	}
 }
