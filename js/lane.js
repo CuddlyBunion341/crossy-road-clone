@@ -1,35 +1,44 @@
 import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 import { worldSize } from "./global.js";
 import { scene } from "./scene.js";
+import { randomSign } from "./util.js";
+import { Vehicle } from "./vehicle.js";
 
-export const LaneManager = function () {
-	this.lanes = [];
-	this.currentLane = 0;
+export class LaneManager {
+	constructor() {
+		this.lanes = [];
+		this.currentLane = 0;
 
-	const init = () => {
 		for (let i = 0; i < 20; i++) {
 			this.addLane();
 		}
-	};
+	}
 
-	this.addLane = () => {
+	addLane() {
 		const newLane = this.currentLane++;
-		const lane = newLane <= 8 ? new EmptyLane(newLane) : new ObstacleLane(newLane);
+		const lane =
+			newLane <= 8
+				? new EmptyLane(newLane)
+				: Math.random() < 0.5
+				? new VehicleLane(newLane)
+				: new ObstacleLane(newLane);
 		this.lanes.push(lane);
-	};
+	}
 
-	this.update = delta => {
+	update(delta) {
 		this.lanes.forEach(lane => lane.update(delta));
-	};
-
-	this.getLane = row => this.lanes[row];
-
-	this.collision = (row, col) => this.lanes?.[row].collision(col);
-
-	this.disposeLane = row => this.lanes?.[row].dispose();
-
-	init();
-};
+	}
+	getLane(row) {
+		return this.lanes[row];
+	}
+	collision(row, col) {
+		return this.lanes?.[row].collision(col);
+	}
+	disposeLane(row) {
+		this.lanes?.[row].dispose();
+		this.lanes.splice(row, 1);
+	}
+}
 
 // Main lane class
 class Lane {
@@ -72,6 +81,32 @@ class ObstacleLane extends Lane {
 
 	collision(col) {
 		return !!this.obstacles[col];
+	}
+}
+
+class VehicleLane extends Lane {
+	constructor(row) {
+		super(row, 0);
+		this.vehicleType = Math.random() < 0.2 ? "truck" : "car";
+		this.direction = randomSign();
+		this.vehicles = [];
+		this.speed = 1;
+
+		this.initVehicles();
+	}
+
+	initVehicles() {
+		const vehicle = new Vehicle(this.vehicleType, this.direction, this.speed);
+		this.group.add(vehicle.group);
+		this.vehicles.push(vehicle);
+	}
+
+	collision(col) {
+		return this.vehicles.some(vehicle => vehicle.contains(col));
+	}
+
+	update() {
+		if (this.active) this.vehicles.forEach(vehicle => vehicle.update(delta));
 	}
 }
 
