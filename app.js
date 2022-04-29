@@ -8,4 +8,5 @@ app.use("/jsm/", express.static(path.join(__dirname, "node_modules/three/example
 
 app.listen(3000, () => {
 	console.log("Server started on port 3000");
+	console.log("Open http://localhost:3000/index.html in your browser");
 });

@@ -28,8 +28,5 @@
 	"dependencies": {
 		"express": "^4.18.0",
 		"three": "^0.139.2"
-	},
-	"devDependencies": {
-		"gh-pages": "^3.2.3"
 	}
 }
