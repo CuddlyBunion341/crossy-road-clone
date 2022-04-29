@@ -1,4 +1,4 @@
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
+import { BoxGeometry, Group, Mesh, MeshStandardMaterial } from "three";
 import { worldSize } from "./global.js";
 import { GameObject } from "./objects.js";
 import { scene } from "./scene.js";
@@ -52,7 +52,8 @@ class Lane {
 	}
 	init(floorColor) {
 		this.group.position.set(this.row, 0, 0);
-		const floor = new Mesh(new BoxGeometry(1, 0.1, worldSize), new MeshMatcapMaterial({ color: floorColor }));
+		const floor = new Mesh(new BoxGeometry(1, 0.1, worldSize), new MeshStandardMaterial({ color: floorColor }));
+		floor.receiveShadow = true;
 		floor.position.set(0.5, -0.05 + 0.1 * this.height, worldSize / 2);
 		this.group.add(floor);
 		scene.add(this.group);

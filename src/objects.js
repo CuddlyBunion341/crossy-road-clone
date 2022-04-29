@@ -1,4 +1,4 @@
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial, Vector3 } from "three";
+import { BoxGeometry, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
 import { randomElement, subtractArray } from "./util";
 
 const models = [
@@ -119,7 +119,7 @@ const createGroup = model => {
 
 		// create material
 		const materialColor = parseInt(color, 16);
-		const material = new MeshMatcapMaterial({ color: materialColor }); // convert from string hex to int
+		const material = new MeshStandardMaterial({ color: materialColor }); // convert from string hex to int
 
 		// create geometry
 		const [x1, y1, z1] = from.map(v => v / 16);
@@ -138,6 +138,11 @@ const createGroup = model => {
 
 		// offset mesh
 		if (meshOffset) mesh.position.add(new Vector3(...meshOffset));
+
+		// shadows
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
+
 		group.add(mesh);
 	});
 
