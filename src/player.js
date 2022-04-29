@@ -27,7 +27,7 @@ export class Player {
 
 	initMesh() {
 		const playerObject = new GameObject("player");
-		playerObject.position.set(this.lane, 0.35, this.col);
+		playerObject.moveTo(this.lane, 0.35, this.col);
 		playerObject.addToGroup(scene);
 		this.object = playerObject;
 	}
@@ -40,13 +40,13 @@ export class Player {
 
 		if (!inRange(this.col + dx, 0, worldSize) || this.lane + dy < 0) return; // out of bounds
 
-		const currentLane = this.laneManager.getLane(this.lane + dy);
-		const collides = currentLane.collision(this.col + dx);
+		const nextLane = this.laneManager.getLane(this.lane + dy);
+		const collides = nextLane.collision(this.col + dx);
 
 		if (collides) {
-			switch (currentLane.constructor.name) {
+			switch (nextLane.constructor.name) {
 				case "VehicleLane":
-					this.die();
+					// this.die();
 					break;
 				case "ObstacleLane":
 					return; // dont move
@@ -55,7 +55,7 @@ export class Player {
 
 		this.col += dx;
 		this.lane += dy;
-		this.object.moveTo(this.lane, 0.35, this.col);
+		this.object.moveTo(this.lane, nextLane.height * 0.1, this.col);
 
 		if (this.lane - initialLane > this.score) {
 			this.score = this.lane - initialLane;

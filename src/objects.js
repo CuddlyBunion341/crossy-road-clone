@@ -5,7 +5,8 @@ const models = [
 	{
 		name: "player",
 		scale: 0.6,
-		meshOffset: [0, 0, 0],
+		meshOffset: [-0.8, 0, 0.8],
+		rotation: Math.PI * 0.5,
 		elements: [
 			{ name: "leftfoot", from: [1, 0, -3], to: [3, 1, 1], color: "ffa500" },
 			{ name: "rightfoot", from: [-3, 0, -3], to: [-1, 1, 1], color: "ffa500" },
@@ -40,9 +41,6 @@ const models = [
 	},
 	{
 		name: "rock",
-		scale: 1,
-		meshOffset: [3 / 16, 0, 3 / 16],
-		groupOffset: [0, 0, 0],
 		elements: [{ name: "rock", from: [3, 0, 3], to: [13, 9, 13], color: "808080" }],
 	},
 ].map(model => {
@@ -81,7 +79,6 @@ const createGroup = model => {
 	if (!elements?.length) throw new Error("No elements found for " + model.name);
 
 	elements.forEach(element => {
-		console.log(element);
 		const { name, from, to, color } = element;
 
 		// create material
@@ -108,7 +105,7 @@ const createGroup = model => {
 		group.add(mesh);
 	});
 
-	if (rotation) group.rotation.set(...rotation);
+	if (rotation) group.rotation.set(0, rotation, 0);
 	if (scale) group.scale.set(scale, scale, scale);
 	if (groupOffset) group.position.set(...groupOffset);
 
@@ -141,7 +138,7 @@ export class GameObject {
 	}
 
 	rotate(angle) {
-		this.group.rotation.set(0, angle, 0);
+		// this.group.rotation.set(0, angle, 0);
 	}
 
 	get position() {

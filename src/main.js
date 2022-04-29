@@ -1,4 +1,5 @@
 import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
+import { worldSize } from "./global.js";
 import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { scene } from "./scene.js";
@@ -11,7 +12,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const axis = new AxesHelper();
-camera.position.set(0, 6, 9);
+camera.position.set(-5, 6, worldSize / 2);
 camera.rotation.set(-Math.PI / 2, -Math.PI / 3, -Math.PI * 0.5);
 camera.updateProjectionMatrix();
 // const controls = new OrbitControls(camera, canvas);
