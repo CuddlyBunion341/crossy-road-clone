@@ -1,3 +1,4 @@
+import * as TWEEN from "@tweenjs/tween.js";
 import { worldSize } from "./global.js";
 import { GameObject } from "./objects.js";
 import { scene } from "./scene.js";
@@ -20,6 +21,8 @@ export class Player {
 		this.score = 0;
 		this.lane = initialLane;
 		this.col = initialCol;
+		this.moving = false;
+		this.height = 1;
 
 		this.initMesh();
 		this.addListeners();
@@ -39,6 +42,7 @@ export class Player {
 		const { dx, dy, angle } = direction;
 
 		if (!inRange(this.col + dx, 0, worldSize) || this.lane + dy < 0) return; // out of bounds
+		if (this.moving) return; // already moving
 
 		const nextLane = this.laneManager.getLane(this.lane + dy);
 		const collides = nextLane.collision(this.col + dx);
@@ -55,9 +59,31 @@ export class Player {
 
 		// this.rotate(angle); // not working
 
+		const position = {
+			x: this.lane,
+			y: 0,
+			z: this.col,
+		};
+
+		this.moving = new TWEEN.Tween(position)
+			.to(
+				{
+					x: this.lane + dy,
+					y: Math.PI, // arc
+					z: this.col + dx,
+				},
+				100
+			)
+			.onUpdate(() => {
+				this.object.moveTo(position.x, Math.sin(position.y) * 0.5 + nextLane.height * 0.1, position.z);
+			})
+			.start()
+			.onComplete(() => {
+				this.moving = false;
+			});
+
 		this.col += dx;
 		this.lane += dy;
-		this.object.moveTo(this.lane, nextLane.height * 0.1, this.col);
 
 		if (this.lane - initialLane > this.score) {
 			this.score = this.lane - initialLane;
