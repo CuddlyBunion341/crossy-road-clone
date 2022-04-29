@@ -1,4 +1,4 @@
-import { createObject } from "../objects.js";
+import { GameObject } from "../objects.js";
 import { worldSize } from "./global.js";
 import { scene } from "./scene.js";
 import { inRange } from "./util.js";
@@ -23,10 +23,10 @@ export class Player {
 	}
 
 	initMesh() {
-		const playerObject = createObject("player");
+		const playerObject = new GameObject("player");
 		playerObject.position.set(this.lane, 0.35, this.col);
-		scene.add(playerObject);
-		this.mesh = playerObject;
+		playerObject.addToScene(scene);
+		this.object = playerObject;
 	}
 
 	update(delta) {}
@@ -52,7 +52,7 @@ export class Player {
 
 		this.col += dx;
 		this.lane += dy;
-		this.mesh.position.set(this.lane + 0.5, 0.35, this.col + 0.5);
+		this.object.moveTo(this.lane, 0.35, this.col);
 
 		this.onMove();
 
@@ -60,7 +60,7 @@ export class Player {
 	}
 
 	rotate(angle) {
-		this.mesh.rotation.y = angle;
+		this.object.rotate(angle);
 	}
 
 	die() {
@@ -107,7 +107,7 @@ export class Player {
 
 	dispose() {
 		this.removeListeners();
-		scene.remove(this.mesh);
+		this.object.dispose();
 	}
 }
 

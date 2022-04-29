@@ -1,4 +1,5 @@
 import { BoxGeometry, Group, Mesh, MeshMatcapMaterial, Vector3 } from "three";
+import { subtractArray } from "./src/util";
 
 const models = [
 	{
@@ -36,17 +37,36 @@ const models = [
 			];
 		},
 	},
-];
+].map(model => {
+	Object.defineProperty(model, "dimensions", {
+		get: function () {
+			const { elements } = this;
+			const { min, max } = elements.reduce(
+				({ min, max }, { from, to }) => {
+					const [x1, y1, z1] = from;
+					const [x2, y2, z2] = to;
+					return {
+						min: [Math.min(min[0], x1, x2), Math.min(min[1], y1, y2), Math.min(min[2], z1, z2)],
+						max: [Math.max(max[0], x1, x2), Math.max(max[1], y1, y2), Math.max(max[2], z1, z2)],
+					};
+				},
+				{ min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
+			);
+			return subtractArray(max, min);
+		},
+	});
+	return model;
+});
 
 export const createObject = name => {
 	const model = models.find(model => model.name === name);
 	if (!model) throw new Error("No model found for " + name);
 
-	const mesh = createMesh(model);
-	return mesh;
+	const group = createGroup(model);
+	return { group, model };
 };
 
-const createMesh = model => {
+const createGroup = model => {
 	const group = new Group();
 	const { elements, rotation, scale, meshOffset, groupOffset } = model;
 
@@ -89,3 +109,48 @@ const createMesh = model => {
 
 	return wrapper;
 };
+
+export class GameObject {
+	constructor(name, props) {
+		this.name = name;
+
+		const object = createObject(name);
+		this.group = object.group;
+		this.dims = object.model.dimensions;
+	}
+
+	static create(name, props) {
+		// alternative constructor
+		return new GameObject(name, props);
+	}
+
+	move(x, y, z) {
+		this.group.position.add(new Vector3(x, y, z));
+	}
+
+	moveTo(x, y, z) {
+		this.group.position.set(x, y, z);
+	}
+
+	rotate(angle) {
+		this.group.rotation.set(0, angle, 0);
+	}
+
+	get position() {
+		return this.group.position;
+	}
+
+	clone() {
+		return new GameObject(this.name, this);
+	}
+
+	dispose() {
+		if (scene) this.scene.remove(this.group);
+		this.group.dispose();
+	}
+
+	addToScene(scene) {
+		scene.add(this.group);
+		this.scene = scene;
+	}
+}
