@@ -1,7 +1,7 @@
+import { createObject } from "../objects.js";
 import { worldSize } from "./global.js";
 import { scene } from "./scene.js";
 import { inRange } from "./util.js";
-import { BoxGeometry, Mesh, MeshBasicMaterial } from "three";
 
 const directions = {
 	north: { dx: 0, dy: 1, angle: Math.PI },
@@ -23,7 +23,8 @@ export class Player {
 	}
 
 	initMesh() {
-		const playerObject = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshBasicMaterial({ color: 0x00ff00 }));
+		// const playerObject = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshBasicMaterial({ color: 0x00ff00 }));
+		const playerObject = createObject("player");
 		playerObject.position.set(this.lane, 0.35, this.col);
 		scene.add(playerObject);
 		this.mesh = playerObject;
