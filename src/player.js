@@ -27,8 +27,8 @@ export class Player {
 
 	initMesh() {
 		const playerObject = new GameObject("player");
-		playerObject.moveTo(this.lane, 0.35, this.col);
-		playerObject.addToGroup(scene);
+		playerObject.moveTo(this.lane, 0.1, this.col);
+		playerObject.addToContainer(scene);
 		this.object = playerObject;
 	}
 
@@ -53,6 +53,8 @@ export class Player {
 			}
 		}
 
+		// this.rotate(angle); // not working
+
 		this.col += dx;
 		this.lane += dy;
 		this.object.moveTo(this.lane, nextLane.height * 0.1, this.col);
@@ -63,8 +65,6 @@ export class Player {
 		}
 
 		this.onMove();
-
-		this.rotate(angle);
 	}
 
 	rotate(angle) {

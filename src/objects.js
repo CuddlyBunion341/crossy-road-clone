@@ -122,6 +122,7 @@ export class GameObject {
 		const object = createObject(name);
 		this.group = object.group;
 		this.dims = object.model.dimensions;
+		this.rotation = 0;
 	}
 
 	static create(name, props) {
@@ -138,7 +139,7 @@ export class GameObject {
 	}
 
 	rotate(angle) {
-		// this.group.rotation.set(0, angle, 0);
+		this.rotation = this.group.rotation.y = angle;
 	}
 
 	get position() {
@@ -150,12 +151,12 @@ export class GameObject {
 	}
 
 	dispose() {
-		if (scene) this.scene.remove(this.group);
+		if (scene) this.container.remove(this.group);
 		this.group.dispose();
 	}
 
-	addToGroup(group) {
-		group.add(this.group);
-		this.scene = group;
+	addToContainer(container) {
+		container.add(this.group);
+		this.container = container;
 	}
 }

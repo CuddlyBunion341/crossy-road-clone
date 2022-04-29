@@ -1,8 +1,11 @@
+import * as THREE from "three";
 import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
 import { worldSize } from "./global.js";
 import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { scene } from "./scene.js";
+
+window.THREE = THREE;
 
 console.log("Hello World");
 
@@ -18,6 +21,8 @@ camera.updateProjectionMatrix();
 // const controls = new OrbitControls(camera, canvas);
 scene.add(camera);
 scene.add(axis);
+
+window.scene = scene;
 
 const laneManager = new LaneManager();
 const player = new Player(laneManager);

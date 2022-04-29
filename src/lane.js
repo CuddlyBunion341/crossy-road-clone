@@ -74,7 +74,7 @@ class ObstacleLane extends Lane {
 				// 20% chance of obstacle
 				const obstacle = Math.random() < 0.1 ? new GameObject("rock") : new GameObject("tree"); // 10% chance of rock
 				obstacle.moveTo(0, 0.1, i);
-				obstacle.addToGroup(this.group);
+				obstacle.addToContainer(this.group);
 				return obstacle;
 			}
 		});
