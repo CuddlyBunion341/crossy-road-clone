@@ -10,13 +10,16 @@ const directions = {
 	west: { dx: -1, dy: 0, angle: Math.PI * 1.5 },
 };
 
+const initialLane = 3;
+const initialCol = (worldSize / 2) << 0;
+
 export class Player {
 	constructor(laneManager) {
 		this.laneManager = laneManager;
 		this.alive = true;
 		this.score = 0;
-		this.lane = 3;
-		this.col = (worldSize / 2) << 0;
+		this.lane = initialLane;
+		this.col = initialCol;
 
 		this.initMesh();
 		this.addListeners();
@@ -53,6 +56,11 @@ export class Player {
 		this.col += dx;
 		this.lane += dy;
 		this.object.moveTo(this.lane, 0.35, this.col);
+
+		if (this.lane - initialLane > this.score) {
+			this.score = this.lane - initialLane;
+			this.onLaneAdvance();
+		}
 
 		this.onMove();
 
