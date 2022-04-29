@@ -7,3 +7,4 @@ export const wrap = (value, min, max) => {
 	return value;
 };
 export const inRange = (value, min, max) => value >= min && value <= max;
+export const randomElement = array => array[randomInt(0, array.length)];

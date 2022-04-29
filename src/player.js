@@ -23,7 +23,6 @@ export class Player {
 	}
 
 	initMesh() {
-		// const playerObject = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshBasicMaterial({ color: 0x00ff00 }));
 		const playerObject = createObject("player");
 		playerObject.position.set(this.lane, 0.35, this.col);
 		scene.add(playerObject);

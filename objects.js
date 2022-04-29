@@ -22,6 +22,20 @@ const models = [
 			{ name: "backtop", from: [-3, 6, -1], to: [3, 11, 1], color: "800080" },
 		],
 	},
+	{
+		name: "tree",
+		scale: 1,
+		meshOffset: [0.5, 0, 0.5],
+		groupOffset: [0, 0, 0],
+		get elements() {
+			const trunkSize = randomElement([3, 5, 7]);
+			const leaveSize = randomElement([16, 18, 20]);
+			return [
+				{ name: "trunk", from: [-2, 0, -2], to: [2, trunkSize, 2], color: "8b4513" },
+				{ name: "leaves", from: [-5, trunkSize, -5], to: [5, leaveSize, 5], color: "00ff00" },
+			];
+		},
+	},
 ];
 
 export const createObject = name => {
