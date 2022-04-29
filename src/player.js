@@ -1,5 +1,5 @@
-import { GameObject } from "../objects.js";
 import { worldSize } from "./global.js";
+import { GameObject } from "./objects.js";
 import { scene } from "./scene.js";
 import { inRange } from "./util.js";
 
@@ -25,7 +25,7 @@ export class Player {
 	initMesh() {
 		const playerObject = new GameObject("player");
 		playerObject.position.set(this.lane, 0.35, this.col);
-		playerObject.addToScene(scene);
+		playerObject.addToGroup(scene);
 		this.object = playerObject;
 	}
 

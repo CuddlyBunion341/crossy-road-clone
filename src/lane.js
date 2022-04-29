@@ -1,8 +1,9 @@
+import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 import { worldSize } from "./global.js";
+import { GameObject } from "./objects.js";
 import { scene } from "./scene.js";
 import { randomSign } from "./util.js";
 import { Vehicle } from "./vehicle.js";
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 
 export class LaneManager {
 	constructor() {
@@ -71,9 +72,9 @@ class ObstacleLane extends Lane {
 		this.obstacles = Array.from({ length: worldSize }, (_, i) => {
 			if (Math.random() < 0.2) {
 				// 20% chance of obstacle
-				const obstacle = new Mesh(new BoxGeometry(0.8, 0.8, 0.8), new MeshMatcapMaterial({ color: 0xff0000 }));
-				obstacle.position.set(0.4, 0.4, i + 0.4);
-				this.group.add(obstacle);
+				const obstacle = Math.random() < 0.1 ? new GameObject("rock") : new GameObject("tree"); // 10% chance of rock
+				obstacle.moveTo(0, 0.1, i);
+				obstacle.addToGroup(this.group);
 				return obstacle;
 			}
 		});

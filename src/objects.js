@@ -1,5 +1,5 @@
 import { BoxGeometry, Group, Mesh, MeshMatcapMaterial, Vector3 } from "three";
-import { subtractArray } from "./src/util";
+import { randomElement, subtractArray } from "./util";
 
 const models = [
 	{
@@ -29,6 +29,7 @@ const models = [
 		meshOffset: [0.5, 0, 0.5],
 		groupOffset: [0, 0, 0],
 		get elements() {
+			// a elements getter for dynamic objects
 			const trunkSize = randomElement([3, 5, 7]);
 			const leaveSize = randomElement([16, 18, 20]);
 			return [
@@ -36,6 +37,13 @@ const models = [
 				{ name: "leaves", from: [-5, trunkSize, -5], to: [5, leaveSize, 5], color: "00ff00" },
 			];
 		},
+	},
+	{
+		name: "rock",
+		scale: 1,
+		meshOffset: [3 / 16, 0, 3 / 16],
+		groupOffset: [0, 0, 0],
+		elements: [{ name: "rock", from: [3, 0, 3], to: [13, 9, 13], color: "808080" }],
 	},
 ].map(model => {
 	Object.defineProperty(model, "dimensions", {
@@ -149,8 +157,8 @@ export class GameObject {
 		this.group.dispose();
 	}
 
-	addToScene(scene) {
-		scene.add(this.group);
-		this.scene = scene;
+	addToGroup(group) {
+		group.add(this.group);
+		this.scene = group;
 	}
 }
