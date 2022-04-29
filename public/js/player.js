@@ -1,7 +1,7 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial } from "three";
 import { worldSize } from "./global.js";
 import { scene } from "./scene.js";
 import { inRange } from "./util.js";
+import { BoxGeometry, Mesh, MeshBasicMaterial } from "three";
 
 const directions = {
 	north: { dx: 0, dy: 1, angle: Math.PI },

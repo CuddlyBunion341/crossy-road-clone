@@ -1,8 +1,8 @@
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 import { worldSize } from "./global.js";
 import { scene } from "./scene.js";
 import { randomSign } from "./util.js";
 import { Vehicle } from "./vehicle.js";
+import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 
 export class LaneManager {
 	constructor() {

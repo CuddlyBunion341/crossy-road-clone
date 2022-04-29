@@ -1,8 +1,10 @@
-import { OrbitControls } from "OrbitControls";
 import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { scene } from "./scene.js";
+
+console.log("Hello World");
 
 const canvas = document.querySelector("#c");
 const renderer = new WebGLRenderer({ canvas });

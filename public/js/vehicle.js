@@ -1,6 +1,6 @@
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 import { worldSize } from "./global.js";
 import { inRange, wrap } from "./util.js";
+import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 
 export class Vehicle {
 	constructor(type, direction, speed) {
