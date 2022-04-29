@@ -1,11 +1,9 @@
-import * as THREE from "three";
 import { AxesHelper, Clock, PerspectiveCamera, WebGLRenderer } from "three";
+import { CameraController } from "./camera.js";
 import { worldSize } from "./global.js";
 import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { light, scene } from "./scene.js";
-
-window.THREE = THREE;
 
 console.log("Hello World");
 
@@ -20,19 +18,19 @@ const axis = new AxesHelper();
 camera.position.set(0, 6, worldSize / 2);
 camera.rotation.set(-Math.PI / 2, -Math.PI / 3, -Math.PI * 0.5);
 camera.updateProjectionMatrix();
+
+const cameraController = new CameraController(camera);
 // const controls = new OrbitControls(camera, canvas);
 scene.add(camera);
 scene.add(axis);
-
-window.scene = scene;
 
 const laneManager = new LaneManager();
 const player = new Player(laneManager);
 
 player.onLaneAdvance = () => {
-	camera.position.x += 1;
-	light.position.x += 1;
 	laneManager.addLane();
+	light.position.x += 1;
+	cameraController.jump();
 };
 
 window.addEventListener("resize", () => {
@@ -48,6 +46,7 @@ const render = () => {
 	const delta = clock.getDelta();
 	laneManager.update(delta);
 	player.update(delta);
+	cameraController.update(delta);
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 };
