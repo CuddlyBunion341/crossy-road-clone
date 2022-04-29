@@ -91,14 +91,14 @@ class VehicleLane extends Lane {
 		this.vehicleType = Math.random() < 0.2 ? "truck" : "car";
 		this.direction = randomSign();
 		this.vehicles = [];
-		this.speed = 10;
+		this.speed = 5;
 
 		this.initVehicles();
 	}
 
 	initVehicles() {
 		const vehicle = new Vehicle(this.vehicleType, this.direction, this.speed);
-		this.group.add(vehicle.group);
+		vehicle.addToContainer(this.group);
 		this.vehicles.push(vehicle);
 	}
 

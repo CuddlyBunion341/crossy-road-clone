@@ -1,27 +1,24 @@
 import { worldSize } from "./global.js";
+import { GameObject } from "./objects.js";
 import { inRange, wrap } from "./util.js";
-import { BoxGeometry, Group, Mesh, MeshMatcapMaterial } from "three";
 
-export class Vehicle {
+export class Vehicle extends GameObject {
 	constructor(type, direction, speed) {
+		super(type);
 		this.type = type;
 		this.direction = direction;
 		this.speed = speed;
-		this.position = 0;
+		this.pos = 0;
 
-		this.group = new Group();
-		const testCube = new Mesh(new BoxGeometry(0.5, 0.5, 0.5), new MeshMatcapMaterial({ color: 0x00ff00 }));
-		testCube.position.set(0.25, 0.25, 0.25);
-		this.group.add(testCube);
+		if (direction === -1) this.rotate(Math.PI); // flip vehicle
 	}
 	contains(col) {
-		return inRange(col, this.position, this.position + 0.5);
+		return inRange(col, this.pos, this.pos + this.dims[0]);
 	}
 
 	update(delta) {
-		// todo: wrap around
-		this.position += this.speed * this.direction * delta;
-		this.position = wrap(this.position, 0, worldSize);
-		this.group.position.z = this.position;
+		this.pos += this.speed * this.direction * delta;
+		this.pos = wrap(this.pos, 0, worldSize);
+		this.moveTo(0, 0, this.pos);
 	}
 }

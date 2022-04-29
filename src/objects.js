@@ -25,6 +25,42 @@ const models = [
 		],
 	},
 	{
+		name: "car",
+		rotation: 0,
+		scale: 1.6,
+		meshOffset: [0, 0, 0.5],
+		groupOffset: [0, 0, 0],
+		get elements() {
+			const carColors = ["ff0000", "ffa500", "ffff00", "00ff00", "00ffff", "0000ff", "ff00ff"];
+			const color = randomElement(carColors);
+			return [
+				{ name: "frontwheel", from: [-5, 0, 3], to: [5, 3, 6], color: "808080" },
+				{ name: "backwheel", from: [-5, 0, -6], to: [5, 3, -3], color: "808080" },
+				{ name: "body", from: [-4, 1, -8], to: [4, 5, 8], color: color },
+				{ name: "cabin", from: [-3, 5, -6], to: [3, 8, 4], color: "add8e6" },
+			];
+		},
+	},
+	{
+		name: "truck",
+		rotation: Math.PI * 0.5,
+		scale: 1.6,
+		meshOffset: [-0.5, 0, 0],
+		groupOffset: [-0.1, 0, 0],
+		elements: [
+			{ name: "backwheel", from: [4, 0, -5], to: [7, 3, 5], color: "000000" },
+			{ name: "frontwheel", from: [-11, 0, -5], to: [-8, 3, 5], color: "000000" },
+			{ name: "cabinwheel", from: [-18, 0, -5], to: [-15, 3, 5], color: "000000" },
+			{ name: "floor", from: [-12, 1, -4], to: [8, 3, 4], color: "c0c0c0" },
+			{ name: "trailer", from: [-12, 3, -6], to: [8, 11, 6], color: "c0c0c0" },
+			{ name: "cabin", from: [-20, 1, -4], to: [-13, 8, 4], color: ["ffa500", "ff0000", "ff00ff"] },
+			{ name: "roof1", from: [-17, 8, -3], to: [-13, 9, 3], color: "c0c0c0" },
+			// { name: "roof2", from: [-16, 9, -3], to: [-13, 10, 3], color: "c0c0c0" },
+			{ name: "join1", from: [-13, 1, -3], to: [-12, 2, 3], color: "c0c0c0" },
+			{ name: "join2", from: [-13, 2, -2], to: [-12, 4, 2], color: "c0c0c0" },
+		],
+	},
+	{
 		name: "tree",
 		scale: 1,
 		meshOffset: [0.5, 0, 0.5],
