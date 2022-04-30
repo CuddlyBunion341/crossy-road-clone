@@ -44,7 +44,7 @@ const models = [
 	{
 		name: "truck",
 		rotation: Math.PI * 0.5,
-		scale: 1.6,
+		scale: 1.4,
 		meshOffset: [-0.5, 0, 0],
 		groupOffset: [-0.1, 0, 0],
 		elements: [
@@ -94,7 +94,8 @@ const models = [
 				},
 				{ min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
 			);
-			return subtractArray(max, min);
+			console.log("s", min, max, subtractArray(max, min), this.scale);
+			return subtractArray(max, min).map(d => (d * (this.scale || 1)) / 16);
 		},
 	});
 	return model;
@@ -163,6 +164,7 @@ export class GameObject {
 		const object = createObject(name);
 		this.group = object.group;
 		this.dims = object.model.dimensions;
+		console.log({ dims: this.dims });
 		this.rotation = 0;
 	}
 
@@ -181,6 +183,10 @@ export class GameObject {
 
 	rotate(angle) {
 		this.rotation = this.group.rotation.y = angle;
+	}
+
+	flatten() {
+		this.group.scale.set(1.5, 0.1, 1.5);
 	}
 
 	get position() {

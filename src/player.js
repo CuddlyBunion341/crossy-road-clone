@@ -35,7 +35,10 @@ export class Player {
 		this.object = playerObject;
 	}
 
-	update(delta) {}
+	update(delta) {
+		const collision = this.laneManager.collision(this.lane, this.col);
+		if (collision) this.die();
+	}
 
 	move(direction) {
 		if (!this.alive) return;
@@ -99,6 +102,7 @@ export class Player {
 
 	die() {
 		this.alive = false;
+		this.object.flatten();
 		this.onDeath();
 	}
 

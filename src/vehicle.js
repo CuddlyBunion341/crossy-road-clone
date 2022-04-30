@@ -13,12 +13,12 @@ export class Vehicle extends GameObject {
 		if (direction === -1) this.rotate(Math.PI); // flip vehicle
 	}
 	contains(col) {
-		return inRange(col, this.pos, this.pos + this.dims[0]);
+		return inRange(col, this.pos, this.pos + this.dims[1] * this.direction);
 	}
 
 	update(delta) {
 		this.pos += this.speed * this.direction * delta;
 		this.pos = wrap(this.pos, 0, worldSize);
-		this.moveTo(0, 0, this.pos);
+		this.moveTo(0.5, 0, this.pos);
 	}
 }

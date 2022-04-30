@@ -20,7 +20,7 @@ camera.rotation.set(-Math.PI / 2, -Math.PI / 3, -Math.PI * 0.5);
 camera.updateProjectionMatrix();
 
 const cameraController = new CameraController(camera);
-// const controls = new OrbitControls(camera, canvas);
+
 scene.add(camera);
 scene.add(axis);
 
@@ -42,7 +42,6 @@ window.addEventListener("resize", () => {
 const clock = new Clock();
 
 const render = () => {
-	// controls?.update();
 	const delta = clock.getDelta();
 	laneManager.update(delta);
 	player.update(delta);

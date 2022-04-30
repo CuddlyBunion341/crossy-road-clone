@@ -6,7 +6,7 @@ export const wrap = (value, min, max) => {
 	if (value > max) return min;
 	return value;
 };
-export const inRange = (value, min, max) => value >= min && value <= max;
+export const inRange = (value, min, max) => value >= Math.min(min, max) && value <= Math.max(min, max);
 export const randomElement = array => array[randomInt(0, array.length)];
 export const randomElementWeighted = (array, weights) => {
 	const total = weights.reduce((a, b) => a + b);
