@@ -94,7 +94,6 @@ const models = [
 				},
 				{ min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
 			);
-			console.log("s", min, max, subtractArray(max, min), this.scale);
 			return subtractArray(max, min).map(d => (d * (this.scale || 1)) / 16);
 		},
 	});
@@ -164,7 +163,6 @@ export class GameObject {
 		const object = createObject(name);
 		this.group = object.group;
 		this.dims = object.model.dimensions;
-		console.log({ dims: this.dims });
 		this.rotation = 0;
 	}
 

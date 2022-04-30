@@ -5,8 +5,6 @@ import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { light, scene } from "./scene.js";
 
-console.log("Hello World");
-
 const canvas = document.querySelector("#c");
 const renderer = new WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
