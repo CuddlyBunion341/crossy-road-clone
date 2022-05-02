@@ -5,6 +5,12 @@ import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { light, scene } from "./scene.js";
 
+let highscore = 0;
+window.addEventListener("load", () => {
+	highscore = localStorage.getItem("highscore");
+	if (highscore) document.querySelector("#highscore").innerHTML = `High: ${highscore}`;
+});
+
 const canvas = document.querySelector("#c");
 const renderer = new WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -40,10 +46,15 @@ cameraController.onCatchup = () => {
 player.onDeath = () => {
 	cameraController.disable();
 	gameOver();
+
+	if (player.score > highscore) {
+		localStorage.setItem("highscore", player.score);
+		document.querySelector("#highscore").innerHTML = `High: ${player.score}`;
+	}
 };
 
 const gameOver = () => {
-	document.querySelector("#game-over").style.display = "flex";
+	document.querySelector("#game-over-wrapper").style.display = "flex";
 	document.querySelector("#restart-btn").focus();
 };
 

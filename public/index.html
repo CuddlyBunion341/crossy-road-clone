@@ -4,9 +4,12 @@
 	<body>
 		<canvas id="c"></canvas>
 		<script src="./bundle.js"></script>
-		<div id="hud">
-			<div id="score">Score: 0</div>
-			<div id="game-over">
+		<div id="hud-wrapper">
+			<div id="score-wrapper">
+				<div id="score">Score: 0</div>
+				<div id="highscore">High: 0</div>
+			</div>
+			<div id="game-over-wrapper">
 				<div id="game-over-text">Game Over</div>
 				<button id="restart-btn" onclick="location.reload();">Try Again</button>
 			</div>
