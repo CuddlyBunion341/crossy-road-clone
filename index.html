@@ -1,13 +1,15 @@
 <html>
 	<head></head>
-	<style>
-		body {
-			margin: 0;
-			overflow: hidden;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css" />
 	<body>
 		<canvas id="c"></canvas>
 		<script src="./bundle.js"></script>
+		<div id="hud">
+			<div id="score">Score: 0</div>
+			<div id="game-over">
+				<div id="game-over-text">Game Over</div>
+				<button id="restart-btn" onclick="location.reload();">Try Again</button>
+			</div>
+		</div>
 	</body>
 </html>
