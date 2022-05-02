@@ -5,6 +5,7 @@ import { LaneManager } from "./lane.js";
 import { Player } from "./player.js";
 import { light, scene } from "./scene.js";
 
+// setup highscore
 let highscore = 0;
 window.addEventListener("load", () => {
 	highscore = localStorage.getItem("highscore");
@@ -37,6 +38,10 @@ player.onLaneAdvance = () => {
 	cameraController.jump();
 	console.log(player.score);
 	document.querySelector("#score").innerHTML = `Score: ${player.score}`;
+};
+
+player.onFirstLaneAdvance = () => {
+	cameraController.enable();
 };
 
 cameraController.onCatchup = () => {

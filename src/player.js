@@ -91,6 +91,7 @@ export class Player {
 		if (this.lane - initialLane > this.score) {
 			this.score = this.lane - initialLane;
 			this.onLaneAdvance();
+			if (this.score == 1) this.onFirstLaneAdvance();
 		}
 
 		this.onMove();
@@ -140,6 +141,7 @@ export class Player {
 
 	// custom events
 	onLaneAdvance() {}
+	onFirstLaneAdvance() {}
 	onMove() {}
 	onDeath() {}
 

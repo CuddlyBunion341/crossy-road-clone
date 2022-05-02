@@ -11,7 +11,7 @@ export class CameraController {
 	constructor(camera) {
 		this.camera = camera;
 		this.speed = 0.3;
-		this.active = true;
+		this.active = false;
 		this.playerLane = 0;
 		this.animation = null;
 	}
@@ -60,6 +60,10 @@ export class CameraController {
 
 	disable() {
 		this.active = false;
+	}
+
+	enable() {
+		this.active = true;
 	}
 
 	onCatchup() {}
