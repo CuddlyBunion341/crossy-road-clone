@@ -3,20 +3,21 @@ body {
     overflow: hidden;
     font-family: sans-serif;
 }
-div#hud {
+div#hud-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
-div#score {
+div#score-wrapper {
     float: right;
     font-size: 3em;
     margin: 0.5em;
+    text-align: right;
 }
 
-div#game-over {
+div#game-over-wrapper {
     position: absolute;
     top: 0;
     left: 0;
