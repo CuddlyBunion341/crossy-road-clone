@@ -34,8 +34,8 @@ const models = [
 			const carColors = ["ff0000", "ffa500", "ffff00", "00ff00", "00ffff", "0000ff", "ff00ff"];
 			const color = randomElement(carColors);
 			return [
-				{ name: "frontwheel", from: [-5, 0, 3], to: [5, 3, 6], color: "808080" },
-				{ name: "backwheel", from: [-5, 0, -6], to: [5, 3, -3], color: "808080" },
+				{ name: "frontwheel", from: [-5, 0, 3], to: [5, 3, 6], color: "000000" },
+				{ name: "backwheel", from: [-5, 0, -6], to: [5, 3, -3], color: "000000" },
 				{ name: "body", from: [-4, 1, -8], to: [4, 5, 8], color: color },
 				{ name: "cabin", from: [-3, 5, -6], to: [3, 8, 4], color: "add8e6" },
 			];

@@ -58,5 +58,9 @@ export class CameraController {
 		}
 	}
 
+	disable() {
+		this.active = false;
+	}
+
 	onCatchup() {}
 }

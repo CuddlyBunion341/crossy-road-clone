@@ -29,6 +29,22 @@ player.onLaneAdvance = () => {
 	laneManager.addLane();
 	light.position.x += 1;
 	cameraController.jump();
+	console.log(player.score);
+	document.querySelector("#score").innerHTML = `Score: ${player.score}`;
+};
+
+cameraController.onCatchup = () => {
+	player.die();
+};
+
+player.onDeath = () => {
+	cameraController.disable();
+	gameOver();
+};
+
+const gameOver = () => {
+	document.querySelector("#game-over").style.display = "flex";
+	document.querySelector("#restart-btn").focus();
 };
 
 window.addEventListener("resize", () => {
