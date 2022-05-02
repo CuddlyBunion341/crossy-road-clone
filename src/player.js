@@ -122,10 +122,12 @@ export class Player {
 			KeyA: moveLeft,
 			KeyD: moveRight,
 
-			KeyArrowUp: moveForward,
-			KeyArrowDown: moveBackward,
-			KeyArrowLeft: moveLeft,
-			KeyArrowRight: moveRight,
+			keySpace: moveForward,
+
+			ArrowUp: moveForward,
+			ArrowDown: moveBackward,
+			ArrowLeft: moveLeft,
+			ArrowRight: moveRight,
 		}[event.code]?.());
 	}
 

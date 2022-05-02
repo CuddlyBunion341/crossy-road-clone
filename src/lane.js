@@ -2,7 +2,7 @@ import { BoxGeometry, Group, Mesh, MeshStandardMaterial } from "three";
 import { worldSize } from "./global.js";
 import { GameObject } from "./objects.js";
 import { scene } from "./scene.js";
-import { randomSign } from "./util.js";
+import { random, randomSign } from "./util.js";
 import { Vehicle } from "./vehicle.js";
 
 export class LaneManager {
@@ -92,7 +92,7 @@ class VehicleLane extends Lane {
 		this.vehicleType = Math.random() < 0.2 ? "truck" : "car";
 		this.direction = randomSign();
 		this.vehicles = [];
-		this.speed = 5;
+		this.speed = random(3, 7);
 
 		this.initVehicles();
 	}
