@@ -1,6 +1,6 @@
 import { worldSize } from "./global.js";
 import { GameObject } from "./objects.js";
-import { inRange, wrap } from "./util.js";
+import { inRange, random, wrap } from "./util.js";
 
 export class Vehicle extends GameObject {
 	constructor(type, direction, speed) {
@@ -8,7 +8,7 @@ export class Vehicle extends GameObject {
 		this.type = type;
 		this.direction = direction;
 		this.speed = speed;
-		this.pos = 0;
+		this.pos = random(0, worldSize);
 
 		if (direction === -1) this.rotate(Math.PI); // flip vehicle
 	}
