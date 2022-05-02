@@ -18,7 +18,7 @@ export class LaneManager {
 	addLane() {
 		const newLane = this.currentLane++;
 		const lane =
-			newLane <= 8
+			newLane <= 5
 				? new EmptyLane(newLane)
 				: Math.random() < 0.5
 				? new VehicleLane(newLane)

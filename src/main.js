@@ -36,7 +36,6 @@ player.onLaneAdvance = () => {
 	laneManager.addLane();
 	light.position.x += 1;
 	cameraController.jump();
-	console.log(player.score);
 	document.querySelector("#score").innerHTML = `Score: ${player.score}`;
 };
 

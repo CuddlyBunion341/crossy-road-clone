@@ -8,9 +8,9 @@ const light = new PointLight(0xffffff, 1);
 light.position.set(10, 10, 0);
 light.castShadow = true;
 light.shadow.camera.near = 0.1;
-light.shadow.camera.far = 40;
-light.shadow.mapSize.width = 4096;
-light.shadow.mapSize.height = 4096;
+light.shadow.camera.far = 25;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
 scene.add(light);
 
 const ambientLight = new AmbientLight(0xffffff, 0.3);
