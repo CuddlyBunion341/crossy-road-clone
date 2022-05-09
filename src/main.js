@@ -7,10 +7,9 @@ import { light, scene } from "./scene.js";
 
 // setup highscore
 let highscore = 0;
-window.addEventListener("load", () => {
-	highscore = localStorage.getItem("highscore");
-	if (highscore) document.querySelector("#highscore").innerHTML = `High: ${highscore}`;
-});
+
+highscore = localStorage.getItem("highscore");
+if (highscore) document.querySelector("#highscore").innerHTML = `High: ${highscore}`;
 
 const canvas = document.querySelector("#c");
 const renderer = new WebGLRenderer({ canvas });

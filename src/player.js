@@ -122,7 +122,7 @@ export class Player {
 			KeyA: moveLeft,
 			KeyD: moveRight,
 
-			keySpace: moveForward,
+			Space: moveForward,
 
 			ArrowUp: moveForward,
 			ArrowDown: moveBackward,

@@ -52,7 +52,7 @@ export class CameraController {
 
 		this.camera.position.x += this.speed * delta;
 		// test if camera is in front of player
-		if (this.camera.position.x > this.playerLane + 1.5) {
+		if (this.camera.position.x > this.playerLane + 1) {
 			this.active = false;
 			this.onCatchup();
 		}
